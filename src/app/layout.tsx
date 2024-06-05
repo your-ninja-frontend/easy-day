@@ -1,16 +1,6 @@
 import type { Metadata } from 'next'
-import { Figtree } from 'next/font/google'
+import { figtree } from '@/ui/fonts/fonts'
 import './globals.scss'
-
-const figtree = Figtree({
-	subsets: ['latin'],
-	weight: ['400', '500', '600', '700'],
-	display: 'swap',
-	variable: '--base-font',
-	style: 'normal',
-	preload: true,
-	fallback: ['system-ui', 'arial', 'sans-serif'],
-})
 
 export const metadata: Metadata = {
 	title: 'Easy Day',
