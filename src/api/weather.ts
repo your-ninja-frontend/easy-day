@@ -1,26 +1,32 @@
-const URL = 'https://api.open-meteo.com/v1/forecast'
+const URL = 'https://api.openweathermap.org/data/2.5/weather?'
 
-const params: IParams = {
+const params: IWeatherParams = {
 	latitude: 55.74,
 	longitude: 37.61,
-	current: ['temperature_2m', 'weather_code'],
+	id: '7fadecc488db79a558587c27a95d0163',
+	units: 'metric',
 }
 
-export async function fetchWeather(setTemper: Function) {
+export async function fetchWeather(setTemper: Function, setWeather: Function) {
 	try {
 		const response = await fetch(
 			URL +
-				'?' +
-				`latitude=${params.latitude}` +
+				`lat=${params.latitude}` +
 				'&' +
-				`longitude=${params.longitude}` +
+				`lon=${params.longitude}` +
 				'&' +
-				`current=${params.current.join()}`,
+				'appid=' +
+				params.id +
+				'&units=' +
+				params.units,
 		)
-		const data = await response.json()
-		const formatTemper = Math.round(data.current.temperature_2m)
+
+		const data: IWeatherData = await response.json()
+		const formatTemper = Math.round(data.main.temp)
+		const weather = data.weather[0].main
+
 		setTemper(formatTemper)
-		console.log(data)
+		setWeather(weather)
 	} catch (e) {
 		console.log(e)
 	}

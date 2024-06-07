@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import style from './style.module.scss'
+import styles from './style.module.scss'
 import Link from 'next/link'
 import { inter } from '@/ui/fonts/fonts'
 
 const Footer: FC = () => {
 	return (
-		<footer className={`${inter.className} ${style.footer}`}>
+		<footer className={`${inter.className} ${styles.footer}`}>
 			<span>
 				© 2024 Easy Day by{' '}
 				<Link href='https://github.com/your-ninja-frontend'>

@@ -10,9 +10,7 @@ const Clock: FC = () => {
 		const i = setInterval(() => {
 			setTime(new Date())
 		}, 5000)
-		return () => {
-			clearInterval(i)
-		}
+		return () => clearInterval(i)
 	}, [])
 
 	let hourse: Time = time.getHours(),

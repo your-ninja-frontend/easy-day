@@ -5,7 +5,7 @@ import React, { FC, useEffect, useState } from 'react'
 
 const formatter: Intl.DateTimeFormatOptions = {
 	weekday: 'short',
-	month: 'long',
+	month: 'short',
 	day: 'numeric',
 }
 
@@ -20,9 +20,7 @@ const DateNow: FC = () => {
 		const i = setInterval(() => {
 			setDate(new Intl.DateTimeFormat('ru', formatter).format(new Date()))
 		}, diff)
-		return () => {
-			clearInterval(i)
-		}
+		return () => clearInterval(i)
 	}, [diff])
 
 	return <div>{date}</div>
