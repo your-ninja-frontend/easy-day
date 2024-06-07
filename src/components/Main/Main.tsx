@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC } from 'react'
 import styles from './style.module.scss'
 import Clock from '@/ui/Clock/Clock'
@@ -8,17 +10,17 @@ import ButtonMain from '@/ui/Buttons/ButtonMain/ButtonMain'
 const Main: FC = () => {
 	return (
 		<main className={styles.main}>
-			<div>
+			<section className={styles.wrapper}>
 				<h2 className={styles.title}>Hello, User!</h2>
-				<div className={styles.date}>
+				<div className={styles.info}>
 					<DateNow></DateNow>
 					<Clock></Clock>
 					{/* <Weather></Weather> */}
 				</div>
-			</div>
-			<div>
-				<ButtonMain>+ Add new List</ButtonMain>
-			</div>
+			</section>
+			<ButtonMain onClick={() => console.log('click')}>
+				+ Add new List
+			</ButtonMain>
 		</main>
 	)
 }

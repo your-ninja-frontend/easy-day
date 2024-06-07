@@ -6,7 +6,7 @@ const Header: FC = () => {
 	return (
 		<header className={styles.header}>
 			<Logo></Logo>
-			<h1>Easy Day</h1>
+			<h1 className={styles.title}>Easy Day</h1>
 		</header>
 	)
 }
