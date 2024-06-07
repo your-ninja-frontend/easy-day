@@ -6,9 +6,9 @@
 	padding: 26px 0 24px;
 
 	background: var(--base-gradient);
+}
 
-	& > h1 {
-		font-size: 24px;
-		font-weight: 600;
-	}
+.title {
+	font-size: 24px;
+	font-weight: 600;
 }

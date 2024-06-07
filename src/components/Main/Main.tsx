@@ -7,14 +7,14 @@ import Weather from '@/ui/Weather/Weather'
 const Main: FC = () => {
 	return (
 		<main className={styles.main}>
-			<div>
+			<section className={styles.wrapper}>
 				<h2 className={styles.title}>Hello, User!</h2>
-				<div className={styles.date}>
+				<div className={styles.info}>
 					<DateNow></DateNow>
 					<Clock></Clock>
-					<Weather></Weather>
+					{/* <Weather></Weather> */}
 				</div>
-			</div>
+			</section>
 		</main>
 	)
 }
