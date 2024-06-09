@@ -1,31 +1,33 @@
 const WEATHER_ICON: IWeatherIcon = {
 	thunderstorm: {
-		description: 'thunderstorm',
+		description: 'Thunderstorm',
 		src: './thunderstorm.svg',
 	},
 	drizzle: {
-		description: 'drizzle',
+		description: 'Drizzle',
 		src: './drizzle.svg',
 	},
 	rain: {
-		description: 'rain',
+		description: 'Rain',
 		src: './rain.svg',
 	},
 	snow: {
-		description: 'rain',
-		src: './rain.svg',
+		description: 'Snow',
+		src: './snow.svg',
 	},
 	clear: {
-		description: 'sun',
+		description: 'Sun',
 		src: './sun.svg',
 	},
 	clouds: {
-		description: 'cloud',
+		description: 'Clouds',
 		src: './cloud.svg',
 	},
 }
 
-export const switchWeatherIcon = (type: string): IWeatherIconObj => {
+export const switchWeatherIcon = (
+	type: string | undefined,
+): IWeatherIconObj | '' => {
 	switch (type) {
 		case WEATHER_ICON.thunderstorm.description:
 			return {
@@ -57,16 +59,13 @@ export const switchWeatherIcon = (type: string): IWeatherIconObj => {
 				src: WEATHER_ICON.clear.src,
 			}
 
-		case WEATHER_ICON.clouds.description:
+		case WEATHER_ICON.clouds.description || 'Atmosphere':
 			return {
 				description: WEATHER_ICON.clouds.description,
 				src: WEATHER_ICON.clouds.src,
 			}
 
 		default:
-			return {
-				description: WEATHER_ICON.clouds.description,
-				src: WEATHER_ICON.clouds.src,
-			}
+			return ''
 	}
 }

@@ -15,7 +15,7 @@ const Main: FC = () => {
 				<div className={styles.info}>
 					<DateNow></DateNow>
 					<Clock></Clock>
-					{/* <Weather></Weather> */}
+					<Weather></Weather>
 				</div>
 			</section>
 			<ButtonMain onClick={() => console.log('click')}>

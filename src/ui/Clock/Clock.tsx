@@ -1,6 +1,5 @@
 'use client'
 
-import { Time } from '@/types/time.types'
 import React, { FC, useEffect, useState } from 'react'
 
 const Clock: FC = () => {

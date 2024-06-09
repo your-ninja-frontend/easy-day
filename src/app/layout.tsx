@@ -8,10 +8,6 @@ export const metadata: Metadata = {
 	description: 'Task planner',
 }
 
-interface ILayoutProps {
-	children: React.ReactNode
-}
-
 const RootLayout: FC<Readonly<ILayoutProps>> = ({ children }) => {
 	return (
 		<html lang='ru'>

@@ -1,4 +1,4 @@
-export interface IButton {
+interface IButton {
 	children: string
 	onClick: () => void
 }
