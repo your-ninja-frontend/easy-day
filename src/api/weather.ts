@@ -12,13 +12,16 @@ const BASE_URL_PARAMS: IWeatherParams = {
 export function fetchWeather(
 	setTemper: setState<number | undefined>,
 	setWeather: setState<string | undefined>,
+	setIsLoading: setState<boolean>,
 ) {
+	setIsLoading(true)
+
 	return async (geo: GeolocationPosition) => {
 		try {
 			const response = await fetch(
 				URL +
-					`lat=${geo.coords.latitude ?? BASE_URL_PARAMS.latitude}` +
-					`&lon=${geo.coords.longitude ?? BASE_URL_PARAMS.longitude}` +
+					`lat=${geo?.coords.latitude ?? BASE_URL_PARAMS.latitude}` +
+					`&lon=${geo?.coords.longitude ?? BASE_URL_PARAMS.longitude}` +
 					`&appid=${BASE_URL_PARAMS.id}` +
 					`&units=${BASE_URL_PARAMS.units}`,
 			)
@@ -29,8 +32,12 @@ export function fetchWeather(
 
 			setTemper(formatTemper)
 			setWeather(weather)
+			setIsLoading(false)
 		} catch {
+			setIsLoading(false)
 			throw new Error('Неудалось получить данные о погоде.')
+		} finally {
+			setIsLoading(false)
 		}
 	}
 }
