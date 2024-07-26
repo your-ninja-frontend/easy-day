@@ -1,0 +1,17 @@
+.task {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+
+	&:hover .buttons,
+	&:focus-within .buttons {
+		visibility: visible;
+	}
+}
+
+.buttons {
+	display: flex;
+	gap: 10px;
+	margin-top: 2px;
+	visibility: hidden;
+}

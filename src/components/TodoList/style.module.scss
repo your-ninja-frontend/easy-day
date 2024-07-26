@@ -1,0 +1,16 @@
+.list {
+	width: 100%;
+	max-width: 360px;
+	padding: 20px;
+	border: 1px solid var(--black);
+	border-radius: 8px;
+	transition: all 0.2s linear;
+
+	@media screen and (min-width: 768px) {
+		max-width: 240px;
+	}
+
+	@media screen and (min-width: 1440px) {
+		max-width: 250px;
+	}
+}

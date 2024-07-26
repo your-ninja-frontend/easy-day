@@ -16,7 +16,7 @@ export function fetchWeather(
 ) {
 	setIsLoading(true)
 
-	return async (geo: GeolocationPosition) => {
+	return async (geo: GeolocationPosition | undefined) => {
 		try {
 			const response = await fetch(
 				URL +
@@ -34,7 +34,6 @@ export function fetchWeather(
 			setWeather(weather)
 			setIsLoading(false)
 		} catch {
-			setIsLoading(false)
 			throw new Error('Неудалось получить данные о погоде.')
 		} finally {
 			setIsLoading(false)

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React, { FC, useEffect, useState } from 'react'
 import styles from './style.module.scss'
 import getGeo from '@/api/geo'
-import Loader from '../Loader/Loader'
+import Loader from '@/ui/Loader/Loader'
 
 const Weather: FC = () => {
 	const [temper, setTemper] = useState<number | undefined>()
@@ -30,7 +30,7 @@ const Weather: FC = () => {
 				<Loader />
 			) : (
 				<>
-					{icon && (
+					{icon && temper != undefined && (
 						<Image
 							src={icon.src}
 							alt={icon.description}
@@ -38,7 +38,7 @@ const Weather: FC = () => {
 							height={20}
 						></Image>
 					)}
-					<span>{temper ?? '' ? `${temper} C` : ''}</span>
+					<span>{temper != undefined ? `${temper} C` : ''}</span>
 				</>
 			)}
 		</div>

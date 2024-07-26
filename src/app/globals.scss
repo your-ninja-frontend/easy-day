@@ -2,6 +2,7 @@
 	--white: #fff;
 	--black: #000;
 	--gray: #ececec;
+	--light-gray: #525252;
 	--base-gradient: linear-gradient(
 		90deg,
 		#fff6e7 0%,
@@ -52,3 +53,17 @@ button {
 	border: none;
 	background: transparent;
 }
+
+// .visually-hidden {
+// 	position: absolute;
+// 	width: 1px;
+// 	height: 1px;
+// 	margin: -1px;
+// 	border: 0;
+// 	padding: 0;
+// 	white-space: nowrap;
+// 	-webkit-clip-path: inset(100%);
+// 	clip-path: inset(100%);
+// 	clip: rect(0 0 0 0);
+// 	overflow: hidden;
+// }

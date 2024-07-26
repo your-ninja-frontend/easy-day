@@ -1,17 +1,24 @@
-'use client'
-
-import React, { FC } from 'react'
+import React, { ButtonHTMLAttributes, ReactNode } from 'react'
 import styles from './style.module.scss'
+import clsx from 'clsx'
 
-const ButtonMain: FC<IButton> = ({ children, onClick }) => {
-	return (
-		<button
-			onClick={() => onClick()}
-			className={styles.button}
-		>
-			{children}
-		</button>
-	)
+type ButtonVariant = 'default'
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	variant?: ButtonVariant
+	children: ReactNode
 }
 
-export default ButtonMain
+export const ButtonMain = ({
+	children,
+	variant = 'default',
+	className,
+	...props
+}: ButtonProps) => (
+	<button
+		className={clsx(styles.button, styles[variant], className)}
+		type='button'
+		{...props}
+	>
+		{children}
+	</button>
+)

@@ -16,7 +16,7 @@ const WEATHER_ICON: IWeatherIcon = {
 		src: './snow.svg',
 	},
 	clear: {
-		description: 'Sun',
+		description: 'Clear',
 		src: './sun.svg',
 	},
 	clouds: {

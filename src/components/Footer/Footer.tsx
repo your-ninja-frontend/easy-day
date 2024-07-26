@@ -9,7 +9,7 @@ const Footer: FC = () => {
 			<span>
 				© 2024 Easy Day by{' '}
 				<Link href='https://github.com/your-ninja-frontend'>
-					your-ninja-frontend
+					ninja-frontend
 				</Link>
 			</span>
 		</footer>
