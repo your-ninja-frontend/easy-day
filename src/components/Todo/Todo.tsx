@@ -1,7 +1,7 @@
 import { ITodo } from '@/types/todos.types'
 import { ButtonIcon } from '@/ui/Buttons/ButtonIcon/ButtonIcon'
 import { InputCheckbox } from '@/ui/Inputs/InputCheckbox/InputCheckbox'
-import React from 'react'
+import React, { useState } from 'react'
 import style from './style.module.scss'
 import { useAppDispatch } from '@/lib/hooks'
 import { removeTodo, setTodoStatus } from '@/lib/features/rootSlice'
@@ -13,25 +13,44 @@ export const Todo = ({
 	todo: ITodo
 	listNumber: number
 }) => {
+	const [editing, isEditing] = useState(false)
 	const dispatch = useAppDispatch()
 
 	return (
 		<li className={style.task}>
-			<InputCheckbox
-				title={todo.title}
-				checked={todo.done}
-				onChange={() =>
-					dispatch(
-						setTodoStatus({ id: todo.id, done: !todo.done, num: listNumber }),
-					)
-				}
-				className={style.checkbox}
-			/>
-			<div className={style.buttons}>
-				<ButtonIcon
-					iconPath='./icon-pencil.svg'
-					alt='Изменить задачу'
+			{!editing ? (
+				<InputCheckbox
+					title={todo.title}
+					checked={todo.done}
+					onChange={() =>
+						dispatch(
+							setTodoStatus({ id: todo.id, done: !todo.done, num: listNumber }),
+						)
+					}
+					className={style.checkbox}
 				/>
+			) : (
+				<input type='text' />
+			)}
+			<div className={style.buttons}>
+				{!editing ? (
+					<>
+						<ButtonIcon
+							iconPath='./icon-pencil.svg'
+							alt='Изменить задачу'
+							onClick={() => isEditing(true)}
+						/>
+					</>
+				) : (
+					<>
+						<ButtonIcon
+							iconPath='./icon-check.svg'
+							alt='Сохранить изменения'
+							onClick={() => isEditing(false)}
+						></ButtonIcon>
+					</>
+				)}
+
 				<ButtonIcon
 					iconPath='./icon-delete-task.svg'
 					alt='Удалить задачу'

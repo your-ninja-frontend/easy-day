@@ -18,7 +18,10 @@ const TodoList = ({ todos, listNumber, title }: TodoListProps) => {
 
 	return (
 		<div className={style.list}>
-			<TodoTitle title={title} />
+			<TodoTitle
+				title={title}
+				listNumber={listNumber}
+			/>
 			<ul>
 				{todos.map(todo => (
 					<Todo

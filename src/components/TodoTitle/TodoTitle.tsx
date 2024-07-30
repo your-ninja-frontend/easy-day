@@ -1,14 +1,42 @@
+import { useAppDispatch } from '@/lib/hooks'
 import { ButtonIcon } from '@/ui/Buttons/ButtonIcon/ButtonIcon'
-import React, { useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
+import style from './style.module.scss'
+import { changeTitleList } from '@/lib/features/rootSlice'
+import debounce from 'lodash.debounce'
 
-const TodoTitle = ({ title }: { title: string }) => {
+const TodoTitle = ({
+	title,
+	listNumber,
+}: {
+	title: string
+	listNumber: number
+}) => {
 	const [editing, isEditing] = useState(false)
+	const [value, setValue] = useState(title)
+	const dispatch = useAppDispatch()
+	const inputRef = useRef<HTMLInputElement>(null)
+	const debounceChangeTitle = useCallback(
+		debounce(value => {
+			dispatch(changeTitleList({ title: value, num: listNumber }))
+		}, 300),
+		[],
+	)
 
 	return (
-		<>
+		<div className={style.wrapper}>
 			{editing ? (
 				<>
-					<input type='text' />
+					<input
+						className={style.input}
+						type='text'
+						ref={inputRef}
+						value={value}
+						onChange={e => {
+							setValue(e.target.value)
+							debounceChangeTitle(e.target.value)
+						}}
+					/>
 					<ButtonIcon
 						iconPath='./icon-check.svg'
 						alt='Сохранить изменения'
@@ -17,15 +45,18 @@ const TodoTitle = ({ title }: { title: string }) => {
 				</>
 			) : (
 				<>
-					<h2>{title}</h2>
+					<h2 className={style.title}>{title}</h2>
 					<ButtonIcon
 						iconPath='./icon-pencil.svg'
 						alt='Изменить заголовок'
-						onClick={() => isEditing(true)}
+						onClick={() => {
+							isEditing(true)
+							setTimeout(() => inputRef.current?.focus(), 100)
+						}}
 					></ButtonIcon>
 				</>
 			)}
-		</>
+		</div>
 	)
 }
 

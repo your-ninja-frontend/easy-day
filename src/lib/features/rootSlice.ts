@@ -53,8 +53,14 @@ const rootSlice = createSlice({
 				action.payload.num
 			].todos.filter(el => el.id !== action.payload.id)
 		},
+		changeTitleList: (
+			state,
+			action: PayloadAction<{ title: string; num: number }>,
+		) => {
+			state.todoLists[action.payload.num].title = action.payload.title
+		},
 	},
 })
 
-export const { setTodoStatus, removeTodo } = rootSlice.actions
+export const { setTodoStatus, removeTodo, changeTitleList } = rootSlice.actions
 export default rootSlice.reducer
