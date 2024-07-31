@@ -2,7 +2,7 @@ import { useAppDispatch } from '@/lib/hooks'
 import { ButtonIcon } from '@/ui/Buttons/ButtonIcon/ButtonIcon'
 import React, { useCallback, useRef, useState } from 'react'
 import style from './style.module.scss'
-import { changeTitleList } from '@/lib/features/rootSlice'
+import { changeTodoList } from '@/lib/features/rootSlice'
 import debounce from 'lodash.debounce'
 
 const TodoTitle = ({
@@ -18,7 +18,7 @@ const TodoTitle = ({
 	const inputRef = useRef<HTMLInputElement>(null)
 	const debounceChangeTitle = useCallback(
 		debounce(value => {
-			dispatch(changeTitleList({ title: value, num: listNumber }))
+			dispatch(changeTodoList({ title: value, num: listNumber }))
 		}, 300),
 		[],
 	)

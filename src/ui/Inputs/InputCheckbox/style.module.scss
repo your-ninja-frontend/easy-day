@@ -4,15 +4,15 @@
 	width: 100%;
 	cursor: pointer;
 
-	&__input,
-	&__title {
+	& .input,
+	& .title {
 		position: relative;
 		display: grid;
 		place-items: center;
 		align-self: flex-start;
 	}
 
-	&__input {
+	& .input {
 		margin-top: 2px;
 		appearance: none;
 		cursor: pointer;
@@ -51,13 +51,13 @@
 				transform: scale(1);
 			}
 
-			& + .checkbox__title {
+			& + .title {
 				text-decoration: line-through;
 			}
 		}
 	}
 
-	&__title {
-		word-break: break-all;
+	& .title {
+		word-break: normal;
 	}
 }

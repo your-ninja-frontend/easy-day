@@ -16,10 +16,10 @@ export const InputCheckbox = ({
 }: InputCheckboxProps) => (
 	<label className={clsx(styles.checkbox, className)}>
 		<input
-			className={styles.checkbox__input}
+			className={styles.input}
 			type='checkbox'
 			{...props}
 		/>
-		<span className={styles.checkbox__title}>{title}</span>
+		<span className={styles.title}>{title}</span>
 	</label>
 )

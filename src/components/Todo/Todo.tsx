@@ -1,10 +1,15 @@
 import { ITodo } from '@/types/todos.types'
 import { ButtonIcon } from '@/ui/Buttons/ButtonIcon/ButtonIcon'
 import { InputCheckbox } from '@/ui/Inputs/InputCheckbox/InputCheckbox'
-import React, { useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import style from './style.module.scss'
 import { useAppDispatch } from '@/lib/hooks'
-import { removeTodo, setTodoStatus } from '@/lib/features/rootSlice'
+import {
+	changeTodoTask,
+	removeTodo,
+	setTodoStatus,
+} from '@/lib/features/rootSlice'
+import debounce from 'lodash.debounce'
 
 export const Todo = ({
 	todo,
@@ -14,7 +19,15 @@ export const Todo = ({
 	listNumber: number
 }) => {
 	const [editing, isEditing] = useState(false)
+	const [value, setValue] = useState(todo.title)
+	const inputRef = useRef<HTMLInputElement>(null)
 	const dispatch = useAppDispatch()
+	const debounceChangeTodo = useCallback(
+		debounce(value => {
+			dispatch(changeTodoTask({ title: value, id: todo.id, num: listNumber }))
+		}, 300),
+		[],
+	)
 
 	return (
 		<li className={style.task}>
@@ -30,25 +43,33 @@ export const Todo = ({
 					className={style.checkbox}
 				/>
 			) : (
-				<input type='text' />
+				<input
+					className={style.changeInput}
+					type='text'
+					value={value}
+					ref={inputRef}
+					onChange={e => {
+						setValue(e.target.value)
+						debounceChangeTodo(e.target.value)
+					}}
+				/>
 			)}
 			<div className={style.buttons}>
 				{!editing ? (
-					<>
-						<ButtonIcon
-							iconPath='./icon-pencil.svg'
-							alt='Изменить задачу'
-							onClick={() => isEditing(true)}
-						/>
-					</>
+					<ButtonIcon
+						iconPath='./icon-pencil.svg'
+						alt='Изменить задачу'
+						onClick={() => {
+							isEditing(true)
+							setTimeout(() => inputRef.current?.focus(), 100)
+						}}
+					/>
 				) : (
-					<>
-						<ButtonIcon
-							iconPath='./icon-check.svg'
-							alt='Сохранить изменения'
-							onClick={() => isEditing(false)}
-						></ButtonIcon>
-					</>
+					<ButtonIcon
+						iconPath='./icon-check.svg'
+						alt='Сохранить изменения'
+						onClick={() => isEditing(false)}
+					></ButtonIcon>
 				)}
 
 				<ButtonIcon
