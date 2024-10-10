@@ -8,7 +8,7 @@ export const TodoBoard = () => {
 	const dispatch = useAppDispatch()
 
 	return (
-		<div className={style.board}>
+		<ul className={style.board}>
 			{todoLists.map((list, i) => (
 				<TodoList
 					key={i}
@@ -17,6 +17,6 @@ export const TodoBoard = () => {
 					todos={list.todos}
 				></TodoList>
 			))}
-		</div>
+		</ul>
 	)
 }

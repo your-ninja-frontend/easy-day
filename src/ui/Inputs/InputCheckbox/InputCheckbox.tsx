@@ -2,7 +2,6 @@
 
 import React, { InputHTMLAttributes } from 'react'
 import styles from './style.module.scss'
-import { ITodo } from '@/types/todos.types'
 import clsx from 'clsx'
 
 interface InputCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {

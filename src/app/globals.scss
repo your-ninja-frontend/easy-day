@@ -3,12 +3,16 @@
 	--black: #000;
 	--gray: #ececec;
 	--light-gray: #525252;
+	--sand: #fff6e7;
+	--green: #e5ffe6;
+	--purple: #f3e4f7;
+	--red: #edbbb4;
 	--base-gradient: linear-gradient(
 		90deg,
-		#fff6e7 0%,
-		#e5ffe6 29.5%,
-		#f3e4f7 60.5%,
-		#edbbb4 98%
+		var(--sand) 0%,
+		var(--green) 29.5%,
+		var(--purple) 60.5%,
+		var(--red) 98%
 	);
 }
 

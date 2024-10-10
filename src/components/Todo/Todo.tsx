@@ -5,7 +5,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import style from './style.module.scss'
 import { useAppDispatch } from '@/lib/hooks'
 import {
-	changeTodoTask,
+	changeTodoTitle,
 	removeTodo,
 	setTodoStatus,
 } from '@/lib/features/rootSlice'
@@ -24,7 +24,7 @@ export const Todo = ({
 	const dispatch = useAppDispatch()
 	const debounceChangeTodo = useCallback(
 		debounce(value => {
-			dispatch(changeTodoTask({ title: value, id: todo.id, num: listNumber }))
+			dispatch(changeTodoTitle({ title: value, id: todo.id, num: listNumber }))
 		}, 300),
 		[],
 	)
@@ -60,6 +60,7 @@ export const Todo = ({
 						iconPath='./icon-pencil.svg'
 						alt='Изменить задачу'
 						onClick={() => {
+							setValue(todo.title)
 							isEditing(true)
 							setTimeout(() => inputRef.current?.focus(), 100)
 						}}

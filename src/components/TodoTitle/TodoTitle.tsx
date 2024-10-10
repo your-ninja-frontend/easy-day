@@ -2,7 +2,7 @@ import { useAppDispatch } from '@/lib/hooks'
 import { ButtonIcon } from '@/ui/Buttons/ButtonIcon/ButtonIcon'
 import React, { useCallback, useRef, useState } from 'react'
 import style from './style.module.scss'
-import { changeTodoList } from '@/lib/features/rootSlice'
+import { changeListTitle } from '@/lib/features/rootSlice'
 import debounce from 'lodash.debounce'
 
 const TodoTitle = ({
@@ -18,7 +18,7 @@ const TodoTitle = ({
 	const inputRef = useRef<HTMLInputElement>(null)
 	const debounceChangeTitle = useCallback(
 		debounce(value => {
-			dispatch(changeTodoList({ title: value, num: listNumber }))
+			dispatch(changeListTitle({ title: value, num: listNumber }))
 		}, 300),
 		[],
 	)
@@ -50,6 +50,7 @@ const TodoTitle = ({
 						iconPath='./icon-pencil.svg'
 						alt='Изменить заголовок'
 						onClick={() => {
+							setValue(title)
 							isEditing(true)
 							setTimeout(() => inputRef.current?.focus(), 100)
 						}}
