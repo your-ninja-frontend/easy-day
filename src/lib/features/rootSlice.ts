@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 interface RootState {
 	todoLists: {
+		listId: string
 		title: string
 		todos: ITodo[]
 	}[]
@@ -12,6 +13,7 @@ interface RootState {
 const initialState: RootState = {
 	todoLists: [
 		{
+			listId: uuidv4(),
 			title: 'Daily To-Do',
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
@@ -24,6 +26,7 @@ const initialState: RootState = {
 			],
 		},
 		{
+			listId: uuidv4(),
 			title: 'Work To-Do',
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
@@ -38,6 +41,7 @@ const initialState: RootState = {
 			],
 		},
 		{
+			listId: uuidv4(),
 			title: 'Workout List',
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
@@ -50,6 +54,7 @@ const initialState: RootState = {
 			],
 		},
 		{
+			listId: uuidv4(),
 			title: 'Self-care List',
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
@@ -70,43 +75,72 @@ const rootSlice = createSlice({
 	reducers: {
 		setTodoStatus: (
 			state,
-			action: PayloadAction<{ id: string; done: boolean; num: number }>,
+			action: PayloadAction<{ id: string; done: boolean; listId: string }>,
 		) => {
-			const index = state.todoLists[action.payload.num].todos.findIndex(
+			const indexList = state.todoLists.findIndex(
+				list => list.listId === action.payload.listId,
+			)
+			const indexTodo = state.todoLists[indexList].todos.findIndex(
 				todo => todo.id === action.payload.id,
 			)
-			state.todoLists[action.payload.num].todos[index].done =
-				action.payload.done
+			state.todoLists[indexList].todos[indexTodo].done = action.payload.done
 		},
-		removeTodo: (state, action: PayloadAction<{ id: string; num: number }>) => {
-			state.todoLists[action.payload.num].todos = state.todoLists[
-				action.payload.num
+		removeTodo: (
+			state,
+			action: PayloadAction<{ id: string; listId: string }>,
+		) => {
+			const indexList = state.todoLists.findIndex(
+				list => list.listId === action.payload.listId,
+			)
+			state.todoLists[indexList].todos = state.todoLists[
+				indexList
 			].todos.filter(el => el.id !== action.payload.id)
 		},
 		changeListTitle: (
 			state,
-			action: PayloadAction<{ title: string; num: number }>,
+			action: PayloadAction<{ title: string; listId: string }>,
 		) => {
-			state.todoLists[action.payload.num].title = action.payload.title
+			const indexList = state.todoLists.findIndex(
+				list => list.listId === action.payload.listId,
+			)
+			state.todoLists[indexList].title = action.payload.title
 		},
 		changeTodoTitle: (
 			state,
-			action: PayloadAction<{ id: string; num: number; title: string }>,
+			action: PayloadAction<{ id: string; listId: string; title: string }>,
 		) => {
-			const index = state.todoLists[action.payload.num].todos.findIndex(
+			const indexList = state.todoLists.findIndex(
+				list => list.listId === action.payload.listId,
+			)
+			const indexTodo = state.todoLists[indexList].todos.findIndex(
 				el => el.id === action.payload.id,
 			)
-			state.todoLists[action.payload.num].todos[index].title =
-				action.payload.title
+			state.todoLists[indexList].todos[indexTodo].title = action.payload.title
 		},
-		removeTodoList: (state, action: PayloadAction<{ num: number }>) => {
-			state.todoLists.splice(action.payload.num, 1)
+		removeTodoList: (state, action: PayloadAction<{ listId: string }>) => {
+			const indexList = state.todoLists.findIndex(
+				list => list.listId === action.payload.listId,
+			)
+			state.todoLists.splice(indexList, 1)
 		},
-		addTodo: (state, action: PayloadAction<{ num: number; value: string }>) => {
-			state.todoLists[action.payload.num].todos.push({
+		addTodo: (
+			state,
+			action: PayloadAction<{ listId: string; value: string }>,
+		) => {
+			const indexList = state.todoLists.findIndex(
+				list => list.listId === action.payload.listId,
+			)
+			state.todoLists[indexList].todos.push({
 				id: uuidv4(),
 				title: action.payload.value,
 				done: false,
+			})
+		},
+		addList: state => {
+			state.todoLists.push({
+				listId: uuidv4(),
+				title: 'Add Title',
+				todos: [],
 			})
 		},
 	},
@@ -119,5 +153,6 @@ export const {
 	changeListTitle,
 	removeTodoList,
 	addTodo,
+	addList,
 } = rootSlice.actions
 export default rootSlice.reducer

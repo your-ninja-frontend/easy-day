@@ -4,6 +4,12 @@
 	gap: 10px;
 	padding: 2px;
 	margin-bottom: 6px;
+	border-radius: 4px;
+
+	&:hover,
+	&:focus-within {
+		background-color: var(--black-opacity-10);
+	}
 
 	@media screen and (min-width: 1024px) {
 		&:hover .buttons,

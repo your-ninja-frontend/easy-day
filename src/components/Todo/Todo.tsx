@@ -1,7 +1,7 @@
 import { ITodo } from '@/types/todos.types'
 import { ButtonIcon } from '@/ui/Buttons/ButtonIcon/ButtonIcon'
 import { InputCheckbox } from '@/ui/Inputs/InputCheckbox/InputCheckbox'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import style from './style.module.scss'
 import { useAppDispatch } from '@/lib/hooks'
 import {
@@ -9,25 +9,12 @@ import {
 	removeTodo,
 	setTodoStatus,
 } from '@/lib/features/rootSlice'
-import debounce from 'lodash.debounce'
 
-export const Todo = ({
-	todo,
-	listNumber,
-}: {
-	todo: ITodo
-	listNumber: number
-}) => {
+export const Todo = ({ todo, listId }: { todo: ITodo; listId: string }) => {
 	const [editing, isEditing] = useState(false)
 	const [value, setValue] = useState(todo.title)
 	const inputRef = useRef<HTMLInputElement>(null)
 	const dispatch = useAppDispatch()
-	const debounceChangeTodo = useCallback(
-		debounce(value => {
-			dispatch(changeTodoTitle({ title: value, id: todo.id, num: listNumber }))
-		}, 300),
-		[],
-	)
 
 	return (
 		<li className={style.task}>
@@ -37,7 +24,7 @@ export const Todo = ({
 					checked={todo.done}
 					onChange={() =>
 						dispatch(
-							setTodoStatus({ id: todo.id, done: !todo.done, num: listNumber }),
+							setTodoStatus({ id: todo.id, done: !todo.done, listId: listId }),
 						)
 					}
 					className={style.checkbox}
@@ -50,7 +37,6 @@ export const Todo = ({
 					ref={inputRef}
 					onChange={e => {
 						setValue(e.target.value)
-						debounceChangeTodo(e.target.value)
 					}}
 				/>
 			)}
@@ -69,7 +55,12 @@ export const Todo = ({
 					<ButtonIcon
 						iconPath='./icon-check.svg'
 						alt='Сохранить изменения'
-						onClick={() => isEditing(false)}
+						onClick={() => {
+							isEditing(false)
+							dispatch(
+								changeTodoTitle({ title: value, id: todo.id, listId: listId }),
+							)
+						}}
 					></ButtonIcon>
 				)}
 
@@ -77,7 +68,7 @@ export const Todo = ({
 					iconPath='./icon-delete-task.svg'
 					alt='Удалить задачу'
 					onClick={() => {
-						dispatch(removeTodo({ id: todo.id, num: listNumber }))
+						dispatch(removeTodo({ id: todo.id, listId: listId }))
 					}}
 				/>
 			</div>

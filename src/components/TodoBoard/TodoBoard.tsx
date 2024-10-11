@@ -1,19 +1,18 @@
 import React from 'react'
 import style from './style.module.scss'
-import { useAppDispatch, useAppSelector } from '@/lib/hooks'
+import { useAppSelector } from '@/lib/hooks'
 import TodoList from '../TodoList/TodoList'
 
 export const TodoBoard = () => {
 	const todoLists = useAppSelector(state => state.rootState.todoLists)
-	const dispatch = useAppDispatch()
 
 	return (
 		<ul className={style.board}>
-			{todoLists.map((list, i) => (
+			{todoLists.map(list => (
 				<TodoList
-					key={i}
+					key={list.listId}
 					title={list.title}
-					listNumber={i}
+					listId={list.listId}
 					todos={list.todos}
 				></TodoList>
 			))}

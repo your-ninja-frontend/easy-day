@@ -34,7 +34,7 @@ export function fetchWeather(
 			setWeather(weather)
 			setIsLoading(false)
 		} catch {
-			throw new Error('Неудалось получить данные о погоде.')
+			console.error('Неудалось получить данные о погоде.')
 		} finally {
 			setIsLoading(false)
 		}

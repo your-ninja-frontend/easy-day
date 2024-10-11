@@ -13,11 +13,11 @@ import { randomColor } from '@/utils/randomColor'
 
 interface TodoListProps {
 	todos: ITodo[]
-	listNumber: number
+	listId: string
 	title: string
 }
 
-const TodoList = ({ todos, listNumber, title }: TodoListProps) => {
+const TodoList = ({ todos, listId, title }: TodoListProps) => {
 	const [color, setColor] = useState('')
 	const dispatch = useAppDispatch()
 
@@ -34,13 +34,13 @@ const TodoList = ({ todos, listNumber, title }: TodoListProps) => {
 			<div className={style.wrapper}>
 				<TodoTitle
 					title={title}
-					listNumber={listNumber}
+					listId={listId}
 				/>
 				<ButtonIcon
 					className={style.button}
 					iconPath='./icon-delete-list.svg'
 					alt='Удалить список'
-					onClick={() => dispatch(removeTodoList({ num: listNumber }))}
+					onClick={() => dispatch(removeTodoList({ listId: listId }))}
 				></ButtonIcon>
 			</div>
 			<ul>
@@ -48,7 +48,7 @@ const TodoList = ({ todos, listNumber, title }: TodoListProps) => {
 					<Todo
 						key={todo.id}
 						todo={todo}
-						listNumber={listNumber}
+						listId={listId}
 					></Todo>
 				))}
 			</ul>
@@ -56,7 +56,7 @@ const TodoList = ({ todos, listNumber, title }: TodoListProps) => {
 				onKeyDown={e => {
 					let target = e.target as HTMLInputElement
 					if (e.code === 'Enter' && target.value) {
-						dispatch(addTodo({ num: listNumber, value: target.value }))
+						dispatch(addTodo({ listId: listId, value: target.value }))
 						target.value = ''
 					}
 				}}

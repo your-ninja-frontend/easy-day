@@ -1,27 +1,14 @@
 import { useAppDispatch } from '@/lib/hooks'
 import { ButtonIcon } from '@/ui/Buttons/ButtonIcon/ButtonIcon'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import style from './style.module.scss'
 import { changeListTitle } from '@/lib/features/rootSlice'
-import debounce from 'lodash.debounce'
 
-const TodoTitle = ({
-	title,
-	listNumber,
-}: {
-	title: string
-	listNumber: number
-}) => {
+const TodoTitle = ({ title, listId }: { title: string; listId: string }) => {
 	const [editing, isEditing] = useState(false)
 	const [value, setValue] = useState(title)
 	const dispatch = useAppDispatch()
 	const inputRef = useRef<HTMLInputElement>(null)
-	const debounceChangeTitle = useCallback(
-		debounce(value => {
-			dispatch(changeListTitle({ title: value, num: listNumber }))
-		}, 300),
-		[],
-	)
 
 	return (
 		<div className={style.wrapper}>
@@ -34,13 +21,15 @@ const TodoTitle = ({
 						value={value}
 						onChange={e => {
 							setValue(e.target.value)
-							debounceChangeTitle(e.target.value)
 						}}
 					/>
 					<ButtonIcon
 						iconPath='./icon-check.svg'
 						alt='Сохранить изменения'
-						onClick={() => isEditing(false)}
+						onClick={() => {
+							isEditing(false)
+							dispatch(changeListTitle({ title: value, listId: listId }))
+						}}
 					></ButtonIcon>
 				</>
 			) : (
