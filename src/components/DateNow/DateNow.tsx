@@ -1,7 +1,7 @@
 'use client'
 
 import { dayTimestamp } from '@/utils/dayTimestamp'
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const formatter: Intl.DateTimeFormatOptions = {
 	weekday: 'short',
@@ -9,7 +9,7 @@ const formatter: Intl.DateTimeFormatOptions = {
 	day: 'numeric',
 }
 
-const DateNow: FC = () => {
+const DateNow = () => {
 	const [date, setDate] = useState(
 		new Intl.DateTimeFormat('ru', formatter).format(new Date()),
 	)

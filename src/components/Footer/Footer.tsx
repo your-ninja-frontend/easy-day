@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
+import React from 'react'
 import styles from './style.module.scss'
 import Link from 'next/link'
 import { inter } from '@/ui/fonts/fonts'
 
-const Footer: FC = () => {
+const Footer = () => {
 	return (
 		<footer className={`${inter.className} ${styles.footer}`}>
 			<span>

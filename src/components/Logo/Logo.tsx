@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import React, { FC } from 'react'
+import React from 'react'
 
-const Logo: FC = () => {
+const Logo = () => {
 	return (
 		<Image
 			src='./logo.svg'

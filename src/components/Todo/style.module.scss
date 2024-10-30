@@ -5,9 +5,9 @@
 	padding: 2px;
 	margin-bottom: 6px;
 	border-radius: 4px;
+	transition: all 0.3s linear;
 
-	&:hover,
-	&:focus-within {
+	&:hover {
 		background-color: var(--black-opacity-10);
 	}
 

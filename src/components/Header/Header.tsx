@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
+import React from 'react'
 import styles from './style.module.scss'
 import Logo from '@/components/Logo/Logo'
 
-const Header: FC = () => {
+const Header = () => {
 	return (
 		<header className={styles.header}>
 			<Logo></Logo>

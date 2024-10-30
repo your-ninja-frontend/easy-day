@@ -1,8 +1,8 @@
 'use client'
 
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const Clock: FC = () => {
+const Clock = () => {
 	const [time, setTime] = useState(new Date())
 
 	useEffect(() => {

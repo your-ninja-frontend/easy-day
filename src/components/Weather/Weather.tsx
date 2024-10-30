@@ -3,12 +3,12 @@
 import { fetchWeather } from '@/api/weather'
 import { switchWeatherIcon } from '@/utils/switchWeatherIcon'
 import Image from 'next/image'
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './style.module.scss'
 import getGeo from '@/api/geo'
 import Loader from '@/ui/Loader/Loader'
 
-const Weather: FC = () => {
+const Weather = () => {
 	const [temper, setTemper] = useState<number | undefined>()
 	const [weather, setWeather] = useState<string | undefined>()
 	const [isLoading, setIsLoading] = useState(false)
@@ -34,7 +34,7 @@ const Weather: FC = () => {
 						<Image
 							src={icon.src}
 							alt={icon.description}
-							width={20}
+							width={21}
 							height={20}
 						></Image>
 					)}
