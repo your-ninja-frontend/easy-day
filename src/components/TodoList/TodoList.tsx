@@ -10,6 +10,7 @@ import { ButtonIcon } from '@/ui/Buttons/ButtonIcon/ButtonIcon'
 import { addTodo, removeTodoList } from '@/lib/features/rootSlice'
 import InputText from '@/ui/Inputs/InputText/InputText'
 import { randomColor } from '@/utils/randomColor'
+import BaseDatePicker from '../DatePicker/DatePicker'
 
 interface TodoListProps {
 	todos: ITodo[]
@@ -43,6 +44,7 @@ const TodoList = ({ todos, listId, title }: TodoListProps) => {
 					onClick={() => dispatch(removeTodoList({ listId: listId }))}
 				></ButtonIcon>
 			</div>
+			<BaseDatePicker className={style.date} />
 			<ul>
 				{todos.map(todo => (
 					<Todo

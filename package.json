@@ -9,8 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.6",
+    "@mui/styles": "^6.1.6",
+    "@mui/x-date-pickers": "^7.22.0",
     "@reduxjs/toolkit": "^2.2.5",
     "@types/uuid": "^10.0.0",
+    "dayjs": "^1.11.13",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",

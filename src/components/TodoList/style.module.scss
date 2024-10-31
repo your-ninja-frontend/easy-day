@@ -15,10 +15,14 @@
 	display: flex;
 	justify-content: space-between;
 	gap: 10px;
-	margin-bottom: 16px;
+	margin-bottom: 5px;
 }
 
 .button {
 	flex-shrink: 0;
 	margin-top: 8px;
+}
+
+.date {
+	margin-bottom: 16px;
 }
