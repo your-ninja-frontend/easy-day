@@ -1,9 +1,10 @@
+import React from 'react'
+import clsx from 'clsx'
+import Calendar from '@/ui/Icons/Calendar'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import React from 'react'
 import { makeStyles } from '@mui/styles'
-import clsx from 'clsx'
 
 const useStyles = makeStyles({
 	root: {},
@@ -16,14 +17,8 @@ const BaseDatePicker = ({ className }: { className: string }) => {
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
 			<DatePicker
 				className={clsx(className, classes.root)}
-				slotProps={{
-					layout: {
-						sx: {
-							'.MuiInputBase-root': {
-								border: '1px solid red',
-							},
-						},
-					},
+				slots={{
+					openPickerIcon: Calendar,
 				}}
 				label='Дата'
 			/>
