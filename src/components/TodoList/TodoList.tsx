@@ -18,7 +18,7 @@ interface TodoListProps {
 	title: string
 }
 
-const TodoList = ({ todos, listId, title }: TodoListProps) => {
+const TodoList = ({ list }: { list: TodoListProps }) => {
 	const [color, setColor] = useState('')
 	const dispatch = useAppDispatch()
 
@@ -34,31 +34,32 @@ const TodoList = ({ todos, listId, title }: TodoListProps) => {
 		>
 			<div className={style.wrapper}>
 				<TodoTitle
-					title={title}
-					listId={listId}
+					title={list.title}
+					listId={list.listId}
 				/>
 				<ButtonIcon
 					className={style.button}
 					iconPath='./icon-delete-list.svg'
 					alt='Удалить список'
-					onClick={() => dispatch(removeTodoList({ listId: listId }))}
-				></ButtonIcon>
+					onClick={() => dispatch(removeTodoList({ listId: list.listId }))}
+				/>
 			</div>
 			<BaseDatePicker className={style.date} />
 			<ul>
-				{todos.map(todo => (
+				{list.todos.map(todo => (
 					<Todo
 						key={todo.id}
 						todo={todo}
-						listId={listId}
-					></Todo>
+						listId={list.listId}
+					/>
 				))}
 			</ul>
 			<InputText
+				placeholder='Добавить задачу'
 				onKeyDown={e => {
 					let target = e.target as HTMLInputElement
 					if (e.code === 'Enter' && target.value) {
-						dispatch(addTodo({ listId: listId, value: target.value }))
+						dispatch(addTodo({ listId: list.listId, value: target.value }))
 						target.value = ''
 					}
 				}}

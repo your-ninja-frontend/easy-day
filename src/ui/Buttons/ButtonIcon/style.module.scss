@@ -1,7 +1,13 @@
 .button {
-	width: 20px;
-	height: 20px;
+	width: 26px;
+	height: 26px;
+	padding: 2px;
+	border-radius: 4px;
 	cursor: pointer;
+
+	&:hover {
+		background-color: var(--white);
+	}
 }
 
 .icon {

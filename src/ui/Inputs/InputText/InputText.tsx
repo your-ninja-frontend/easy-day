@@ -6,7 +6,6 @@ const InputText = (props: InputHTMLAttributes<HTMLInputElement>) => {
 		<input
 			className={styles.input}
 			type='text'
-			placeholder='+ Add a task'
 			{...props}
 		></input>
 	)

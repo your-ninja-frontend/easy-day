@@ -139,7 +139,7 @@ const rootSlice = createSlice({
 		addList: state => {
 			state.todoLists.push({
 				listId: uuidv4(),
-				title: 'Add Title',
+				title: 'Добавить заголовок',
 				todos: [],
 			})
 		},

@@ -16,17 +16,17 @@ const Main = () => {
 	return (
 		<main className={styles.main}>
 			<section className={styles.wrapper}>
-				<h2 className={styles.title}>Hello, User!</h2>
+				<h2 className={styles.title}>Привет, работяга!</h2>
 				<div className={styles.info}>
-					<DateNow></DateNow>
-					<Clock></Clock>
-					<Weather></Weather>
+					<DateNow />
+					<Clock />
+					<Weather />
 				</div>
 			</section>
 			<ButtonMain onClick={() => dispatch(addList())}>
-				+ Add new List
+				+ Добавить список
 			</ButtonMain>
-			<TodoBoard></TodoBoard>
+			<TodoBoard />
 		</main>
 	)
 }

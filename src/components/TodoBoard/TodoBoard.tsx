@@ -8,13 +8,11 @@ export const TodoBoard = () => {
 
 	return (
 		<ul className={style.board}>
-			{todoLists.map(list => (
+			{todoLists.map(todoList => (
 				<TodoList
-					key={list.listId}
-					title={list.title}
-					listId={list.listId}
-					todos={list.todos}
-				></TodoList>
+					key={todoList.listId}
+					list={todoList}
+				/>
 			))}
 		</ul>
 	)
