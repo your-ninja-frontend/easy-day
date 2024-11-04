@@ -1,20 +1,25 @@
+import dayjs from 'dayjs'
 import { ITodo } from '@/types/todos.types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
+import { stat } from 'fs'
+import { todo } from 'node:test'
 
-interface RootState {
-	todoLists: {
-		listId: string
-		title: string
-		todos: ITodo[]
-	}[]
+export interface TodoList {
+	listId: string
+	title: string
+	todos: ITodo[]
+	date: string
 }
+
+type RootState = { todoLists: TodoList[] }
 
 const initialState: RootState = {
 	todoLists: [
 		{
 			listId: uuidv4(),
 			title: 'Daily To-Do',
+			date: '04.11.24',
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
 				{ id: uuidv4(), title: 'Deep clean floors.', done: false },
@@ -28,6 +33,7 @@ const initialState: RootState = {
 		{
 			listId: uuidv4(),
 			title: 'Work To-Do',
+			date: '05.11.24',
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
 				{ id: uuidv4(), title: 'Deep clean floors.', done: false },
@@ -43,6 +49,7 @@ const initialState: RootState = {
 		{
 			listId: uuidv4(),
 			title: 'Workout List',
+			date: '07.11.24',
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
 				{ id: uuidv4(), title: 'Deep clean floors.', done: false },
@@ -56,6 +63,7 @@ const initialState: RootState = {
 		{
 			listId: uuidv4(),
 			title: 'Self-care List',
+			date: '08.11.24',
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
 				{ id: uuidv4(), title: 'Deep clean floors.', done: false },
@@ -69,6 +77,11 @@ const initialState: RootState = {
 	],
 }
 
+const findIndex = (
+	state: RootState,
+	action: PayloadAction<{ id?: string; done?: boolean; listId?: string }>,
+) => state.todoLists.findIndex(list => list.listId === action.payload.listId)
+
 const rootSlice = createSlice({
 	name: 'rootState',
 	initialState: initialState,
@@ -77,9 +90,7 @@ const rootSlice = createSlice({
 			state,
 			action: PayloadAction<{ id: string; done: boolean; listId: string }>,
 		) => {
-			const indexList = state.todoLists.findIndex(
-				list => list.listId === action.payload.listId,
-			)
+			const indexList = findIndex(state, action)
 			const indexTodo = state.todoLists[indexList].todos.findIndex(
 				todo => todo.id === action.payload.id,
 			)
@@ -89,47 +100,37 @@ const rootSlice = createSlice({
 			state,
 			action: PayloadAction<{ id: string; listId: string }>,
 		) => {
-			const indexList = state.todoLists.findIndex(
-				list => list.listId === action.payload.listId,
-			)
+			const indexList = findIndex(state, action)
 			state.todoLists[indexList].todos = state.todoLists[
 				indexList
-			].todos.filter(el => el.id !== action.payload.id)
+			].todos.filter(todo => todo.id !== action.payload.id)
 		},
 		changeListTitle: (
 			state,
 			action: PayloadAction<{ title: string; listId: string }>,
 		) => {
-			const indexList = state.todoLists.findIndex(
-				list => list.listId === action.payload.listId,
-			)
+			const indexList = findIndex(state, action)
 			state.todoLists[indexList].title = action.payload.title
 		},
 		changeTodoTitle: (
 			state,
 			action: PayloadAction<{ id: string; listId: string; title: string }>,
 		) => {
-			const indexList = state.todoLists.findIndex(
-				list => list.listId === action.payload.listId,
-			)
+			const indexList = findIndex(state, action)
 			const indexTodo = state.todoLists[indexList].todos.findIndex(
-				el => el.id === action.payload.id,
+				todo => todo.id === action.payload.id,
 			)
 			state.todoLists[indexList].todos[indexTodo].title = action.payload.title
 		},
 		removeTodoList: (state, action: PayloadAction<{ listId: string }>) => {
-			const indexList = state.todoLists.findIndex(
-				list => list.listId === action.payload.listId,
-			)
+			const indexList = findIndex(state, action)
 			state.todoLists.splice(indexList, 1)
 		},
 		addTodo: (
 			state,
 			action: PayloadAction<{ listId: string; value: string }>,
 		) => {
-			const indexList = state.todoLists.findIndex(
-				list => list.listId === action.payload.listId,
-			)
+			const indexList = findIndex(state, action)
 			state.todoLists[indexList].todos.push({
 				id: uuidv4(),
 				title: action.payload.value,
@@ -140,8 +141,16 @@ const rootSlice = createSlice({
 			state.todoLists.push({
 				listId: uuidv4(),
 				title: 'Добавить заголовок',
+				date: dayjs().format('DD.MM.YY'),
 				todos: [],
 			})
+		},
+		changeDate: (
+			state,
+			action: PayloadAction<{ listId: string; date: string }>,
+		) => {
+			const indexList = findIndex(state, action)
+			state.todoLists[indexList].date = action.payload.date
 		},
 	},
 })
@@ -154,5 +163,6 @@ export const {
 	removeTodoList,
 	addTodo,
 	addList,
+	changeDate,
 } = rootSlice.actions
 export default rootSlice.reducer
