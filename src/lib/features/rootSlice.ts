@@ -2,8 +2,6 @@ import dayjs from 'dayjs'
 import { ITodo } from '@/types/todos.types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
-import { stat } from 'fs'
-import { todo } from 'node:test'
 
 export interface TodoList {
 	listId: string
