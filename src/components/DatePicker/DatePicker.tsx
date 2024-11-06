@@ -30,23 +30,20 @@ const BaseDatePicker = ({
 					openPickerIcon: Calendar,
 				}}
 				slotProps={{
+					openPickerIcon: {
+						sx: {
+							margin: '0px',
+						},
+					},
 					textField: {
+						variant: 'standard',
 						sx: {
 							'.MuiInputBase-root': {
 								width: '160px',
+								padding: '0px 14px',
 								backgroundColor: 'transparent',
 								borderRadius: '4px',
 								fontSize: '20px',
-
-								'&MuiFilledInput-root': {
-									'&:hover': {
-										'&:not(.Mui-disabled, .Mui-error)': {
-											'&:before': {
-												border: 'none',
-											},
-										},
-									},
-								},
 
 								'&::before, &::after': {
 									border: 'none',
@@ -59,17 +56,28 @@ const BaseDatePicker = ({
 								'&:focus-within': {
 									backgroundColor: 'white',
 								},
+
+								'&.MuiInput-root': {
+									'&:hover': {
+										'&::before, &::after': {
+											border: 'none',
+										},
+									},
+								},
 							},
 
 							'.MuiInputBase-input': {
-								padding: '0px 2px',
+								padding: '0px',
 							},
-
+						},
+					},
+					inputAdornment: {
+						position: 'start',
+						sx: {
 							'.MuiButtonBase-root': {
 								padding: '0px 2px',
 							},
 						},
-						variant: 'filled',
 					},
 				}}
 			/>

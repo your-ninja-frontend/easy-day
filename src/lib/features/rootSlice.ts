@@ -17,7 +17,7 @@ const initialState: RootState = {
 		{
 			listId: uuidv4(),
 			title: 'Daily To-Do',
-			date: '04.11.24',
+			date: dayjs().format('DD.MM.YY'),
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
 				{ id: uuidv4(), title: 'Deep clean floors.', done: false },
@@ -31,7 +31,7 @@ const initialState: RootState = {
 		{
 			listId: uuidv4(),
 			title: 'Work To-Do',
-			date: '05.11.24',
+			date: dayjs().format('DD.MM.YY'),
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
 				{ id: uuidv4(), title: 'Deep clean floors.', done: false },
@@ -47,7 +47,7 @@ const initialState: RootState = {
 		{
 			listId: uuidv4(),
 			title: 'Workout List',
-			date: '07.11.24',
+			date: dayjs().format('DD.MM.YY'),
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
 				{ id: uuidv4(), title: 'Deep clean floors.', done: false },
@@ -61,7 +61,7 @@ const initialState: RootState = {
 		{
 			listId: uuidv4(),
 			title: 'Self-care List',
-			date: '08.11.24',
+			date: dayjs().format('DD.MM.YY'),
 			todos: [
 				{ id: uuidv4(), title: 'Stay positive', done: true },
 				{ id: uuidv4(), title: 'Deep clean floors.', done: false },
