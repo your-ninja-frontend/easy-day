@@ -1,14 +1,14 @@
 .header {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 5px;
-	padding: 26px 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 26px 0 24px;
 
-	background: var(--base-gradient);
+  background: var(--base-gradient);
 }
 
 .title {
-	font-size: 24px;
-	font-weight: 600;
+  font-size: 24px;
+  font-weight: 600;
 }

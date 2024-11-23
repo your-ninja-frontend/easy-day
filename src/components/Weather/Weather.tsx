@@ -1,48 +1,53 @@
-'use client'
+'use client';
 
-import { fetchWeather } from '@/api/weather'
-import { switchWeatherIcon } from '@/utils/switchWeatherIcon'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import styles from './style.module.scss'
-import getGeo from '@/api/geo'
-import Loader from '@/ui/Loader/Loader'
+import { fetchWeather } from '@/api/fetchWeather';
+import getGeo from '@/api/getGeo';
+import { useFetching } from '@/hooks/hooks';
+import Loader from '@/ui/Loader/Loader';
+import { switchWeatherIcon } from '@/utils/switchWeatherIcon';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import styles from './style.module.scss';
 
 const Weather = () => {
-	const [temper, setTemper] = useState<number | undefined>()
-	const [weather, setWeather] = useState<string | undefined>()
-	const [isLoading, setIsLoading] = useState(false)
+  const [temper, setTemper] = useState<number>();
+  const [icon, setIcon] = useState<'' | IWeatherIconObj>();
 
-	const icon = switchWeatherIcon(weather)
+  const [fetchUserWeather, loading, error] = useFetching(async () => {
+    const coords = await getGeo();
+    const [userWeather, formatTemper] = await fetchWeather(coords);
+    setTemper(formatTemper);
+    setIcon(switchWeatherIcon(userWeather));
+  });
 
-	useEffect(() => {
-		getGeo(fetchWeather(setTemper, setWeather, setIsLoading))
+  useEffect(() => {
+    fetchUserWeather();
 
-		const i = setInterval(() => {
-			getGeo(fetchWeather(setTemper, setWeather, setIsLoading))
-		}, 1200000)
-		return () => clearInterval(i)
-	}, [])
+    const i = setInterval(() => {
+      fetchUserWeather();
+    }, 300000);
+    return () => clearInterval(i);
+  }, []);
 
-	return (
-		<div className={styles.weather}>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<>
-					{icon && temper != undefined && (
-						<Image
-							src={icon.src}
-							alt={icon.description}
-							width={21}
-							height={20}
-						></Image>
-					)}
-					<span>{temper != undefined ? `${temper} C` : ''}</span>
-				</>
-			)}
-		</div>
-	)
-}
+  return (
+    <div className={styles.weather}>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          {!error && icon && (
+            <>
+              <Image src={icon.src} alt={icon.description} width={21} height={20} />
+              <span>
+                {`${temper}`}
+                <sup>°C</sup>
+              </span>
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
 
-export default Weather
+export default Weather;

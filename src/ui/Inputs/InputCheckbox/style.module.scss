@@ -1,63 +1,63 @@
 .checkbox {
-	display: flex;
-	gap: 8px;
-	width: 100%;
-	cursor: pointer;
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  cursor: pointer;
 
-	& .input,
-	& .title {
-		position: relative;
-		display: grid;
-		place-items: center;
-		align-self: flex-start;
-	}
+  & .input,
+  & .title {
+    position: relative;
+    display: grid;
+    place-items: center;
+    align-self: flex-start;
+  }
 
-	& .input {
-		margin-top: 2px;
-		appearance: none;
-		cursor: pointer;
+  & .input {
+    margin-top: 2px;
+    appearance: none;
+    cursor: pointer;
 
-		&::before,
-		&::after {
-			content: '';
-			transition:
-				background-color 0.5s linear,
-				transform 0.3s ease-in;
-		}
+    &::before,
+    &::after {
+      content: '';
+      transition:
+        background-color 0.5s linear,
+        transform 0.3s ease-in;
+    }
 
-		&::before {
-			width: 14px;
-			height: 14px;
-			border: 3px solid var(--black);
-			border-radius: 3px;
-		}
+    &::before {
+      width: 14px;
+      height: 14px;
+      border: 3px solid var(--black);
+      border-radius: 3px;
+    }
 
-		&::after {
-			position: absolute;
-			width: 11px;
-			height: 9px;
-			background-image: url('/icon-checkbox.svg');
-			background-repeat: no-repeat;
-			background-position: center;
-			transform: scale(0);
-		}
+    &::after {
+      position: absolute;
+      width: 11px;
+      height: 9px;
+      background-image: url('/icon-checkbox.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: scale(0);
+    }
 
-		&:checked {
-			&::before {
-				background-color: var(--black);
-			}
+    &:checked {
+      &::before {
+        background-color: var(--black);
+      }
 
-			&::after {
-				transform: scale(1);
-			}
+      &::after {
+        transform: scale(1);
+      }
 
-			& + .title {
-				text-decoration: line-through;
-			}
-		}
-	}
+      & + .title {
+        text-decoration: line-through;
+      }
+    }
+  }
 
-	& .title {
-		word-break: break-all;
-	}
+  & .title {
+    word-break: break-all;
+  }
 }

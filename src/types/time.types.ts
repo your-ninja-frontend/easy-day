@@ -1,1 +1,1 @@
-type Time = string | number
+type Time = string | number;

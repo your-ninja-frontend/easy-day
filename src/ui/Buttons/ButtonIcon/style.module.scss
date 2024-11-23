@@ -1,16 +1,16 @@
 .button {
-	width: 26px;
-	height: 26px;
-	padding: 2px;
-	border-radius: 4px;
-	cursor: pointer;
+  width: 26px;
+  height: 26px;
+  padding: 2px;
+  border-radius: 4px;
+  cursor: pointer;
 
-	&:hover {
-		background-color: var(--white);
-	}
+  &:hover {
+    background-color: var(--white);
+  }
 }
 
 .icon {
-	width: 100%;
-	height: auto;
+  width: 100%;
+  height: auto;
 }
