@@ -2,7 +2,7 @@
 
 import { fetchWeather } from '@/api/fetchWeather';
 import getGeo from '@/api/getGeo';
-import { useFetching } from '@/hooks/hooks';
+import { useFetching } from '@/hooks/useFetching';
 import Loader from '@/ui/Loader/Loader';
 import { switchWeatherIcon } from '@/utils/switchWeatherIcon';
 import Image from 'next/image';
